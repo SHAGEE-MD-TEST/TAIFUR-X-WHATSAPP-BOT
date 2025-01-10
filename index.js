@@ -25,7 +25,7 @@ const FileType = require("file-type")
 const { cmd, commands } = require('./command')
 const { File } = require('megajs')
 const prefix = config.PREFIX 
-const ownerNumber = ['595995660558']
+const ownerNumber = ['94710136994']
 const l = console.log
 //===================DATABASE=========================
 const db_pool = new DBM({
@@ -37,17 +37,19 @@ const heroku = new Heroku({
 
 console.log("✔️ SQL Database Connected")
 
-/* ===========SESSION===========
+//===================SESSION============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
-if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-const sessdata = config.SESSION_ID.split("taifur-x@;;;")[1]
-const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-filer.download((err, data) => {
-if(err) throw err
-fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
-console.log("🔒 Session Successfully Loaded !!")
-})})}
-*/
+    if (config.SESSION_ID) {
+      const sessdata = config.SESSION_ID.replace("NEBULA=", "")
+      const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
+      filer.download((err, data) => {
+        if (err) throw err
+        fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
+          console.log("Session Download Completed !")
+        })
+      })
+    }
+  }
 // <<==========PORTS===========>>
 const express = require("express");
 const app = express();
@@ -57,7 +59,7 @@ const port = process.env.PORT || 8000;
 async function connectToWA() {
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
 const { version, isLatest } = await fetchLatestBaileysVersion()
-console.log(`🤖 Taifur-X using WA v${version.join('.')}, isLatest: ${isLatest}`)
+console.log(`🤖 SHAGEE-X using WA v${version.join('.')}, isLatest: ${isLatest}`)
 const conn = makeWASocket({
 version,
 logger: pino({ level: 'silent' }),
@@ -70,7 +72,7 @@ getMessage: async (key) => {
                 return msg.message || undefined
             }
             return {
-                conversation: "TAIFUR-X Web 2.1"
+                conversation: "SHAGEE-X Web 2.1"
             }
         }})
 
@@ -89,9 +91,10 @@ require("./plugins/" + plugin);
 }
 });
 console.log('📚 All Plugins installed')
-console.log('🐉 Taifur-X WhatsApp Bot connected ✅')
-//const botada = jidNormalizedUser(conn.user.id)   
-//conn.sendMessage(botada, { image: { url : "https://telegra.ph/file/bc812968537e8c21c63f3.jpg" } , caption: "*TAIFUR-X 2.0 Connected to WhatsApp* ✔️\n\n_This is the result of our team's hard work and our team owns the bot's rights and code rights. Therefore, you have no chance to change and submit our bot under any circumstances._\n\n🔰 *Official GitHub* - ```https://github.com/Itxtaifur ```\n\n🪀 *WhatsApp Community* - ```https://chat.whatsapp.com/JYWh2a462ZJHgdULBXmT5X```\n\n🧿 *Announcement Group* - ```https://chat.whatsapp.com/JYWh2a462ZJHgdULBXmT5X```\n\n*TAIFUR ᴏꜰꜰɪᴄɪᴀʟ*\n*ᴀʟʟ ʀɪɢʜᴛ ʀᴇꜱᴇʀᴠᴇᴅ - ᴛᴇᴀᴍ*"})
+console.log('🐉 SHAGEE-MD WhatsApp Bot connected ✅')
+    
+const botada = jidNormalizedUser(conn.user.id)   
+    conn.sendMessage(botada, { image: { url : "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" } , caption: "*SHAGEE-X-MD 2.0 Connected to WhatsApp* ✔️\n\n_This is the result of our team's hard work and our team owns the bot's rights and code rights. Therefore, you have no chance to change and submit our bot under any circumstances._\n\n🔰 *Official GitHub* - ```https://github.com/SHAGEE-MD-TEST ```\n\n🪀 *WhatsApp Community* - ```https://chat.whatsapp.com/JYWh2a462ZJHgdULBT5X```\n\n🧿 *Announcement Group* - ```https://chat.whatsapp.com/```\n\n*SHAGEE ᴏꜰꜰɪᴄɪᴀʟ*\n*ᴀʟʟ ʀɪɢʜᴛ ʀᴇꜱᴇʀᴠᴇᴅ - ᴛᴇᴀᴍ*"})
 }
 })
 conn.ev.on('creds.update', saveCreds)
@@ -100,7 +103,7 @@ try {
 mek = mek.messages[0]
 if (!mek.message) return	
 mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-//if (mek.key && mek.key.remoteJid === 'status@broadcast') return
+if (mek.key && mek.key.remoteJid === 'status@broadcast') return
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
@@ -161,46 +164,46 @@ const isDev = [ ...epada ]
     if( from == '120363174739054837@g.us' ) return
 
     
-  if( sender == '4593707292@s.whatsapp.net' ) {
+  if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `🥷`, key: mek.key }})
 }
-    if( sender == '94778962038@s.whatsapp.net' ) {
+    if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `🥷`, key: mek.key }})
 }
 
-   if( sender == '94775512050@s.whatsapp.net' ) {
+   if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `⚖️`, key: mek.key }})
 }
   
-  if( sender == '94715166712@s.whatsapp.net' ) {
+  if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `🌙`, key: mek.key }})
 }
 
-if( sender == '94715346004@s.whatsapp.net' ) {
+if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `💫`, key: mek.key }})
 }
 
-if( sender == '94784596431@s.whatsapp.net' ) {
+if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `⭐`, key: mek.key }})
 }
 
-if( sender == '94787820101@s.whatsapp.net' ) {
+if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `⚡`, key: mek.key }})
 }
 
-if( sender == '94762862143@s.whatsapp.net' ) {
+if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `⭐`, key: mek.key }})
 }
 
-if( sender == '94743386944@s.whatsapp.net' ) {
+if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `🕊️`, key: mek.key }})
 }
 
-if( sender == '94729932436@s.whatsapp.net' ) {
+if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `🔮`, key: mek.key }})
 }
 
-if( sender == '94785893102@s.whatsapp.net' ) {
+if( sender == '94710136994@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `⚖`, key: mek.key }})
 }
   
@@ -283,7 +286,7 @@ if (cmd.react) await conn.sendMessage(from, { react: { text: cmd.react, key: mek
 try {
 cmd.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, mime, botNumber, pushname, isMe ,isOwner, mentionByTag ,groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply, isCreator , isDev });
 } catch (e) {
-console.error("[PLUGIN ERROR]", e);
+console.error("[PLUGIN ERROR.......................]", e);
 }
 }
 }
@@ -429,7 +432,7 @@ if ( rew.includes('APK') ) {
 const getid = rew.split("ɪᴅ - ")[1]
 const app = await download(getid)
 const msgg =`
-*CYBER-X APK INFORMATIONS*
+*CYBER SHAGEE-X APK INFORMATIONS*
 
 📚 *App name -: ${app.name}*
 
@@ -441,8 +444,7 @@ const msgg =`
 
 📱 Play Store Link -: https://play.google.com/store/apps/details?id=${app.package}
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
+*SHAGEE-X-MD : ᴠᴏʟ-ɪɪ*`
 await conn.sendMessage(from, { image: { url : app.icon } , caption: msgg }, { quoted: mek })
 
 }
@@ -527,7 +529,7 @@ menuc += `⏲️ *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *MAIN COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *MAIN COMMAND LIST-SHAGEE-X*
 
 ${menuc}
 
@@ -537,9 +539,8 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/de783e49d45aff62460eb.jpg" }, caption: menumg }, { quoted: mek } )
+*SHAGEE-MD  V 1 *`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
 if ( rew.includes('Moderator Configuration') ) {
@@ -563,7 +564,7 @@ if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
 let baseURI = '/apps/' + config.HEROKU_APP_NAME
 await heroku.patch(baseURI + '/config-vars', {
                     body: {
-                        ['MODERATORS']: "4593707292"
+                        ['MODERATORS']: "94710136994"
                     }
                 });
 const resmsg =`*Moderator List Reseted* ✅
@@ -588,7 +589,7 @@ menuc += `📥 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *DOWNLOAD COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *DOWNLOAD COMMAND LIST-CYBER SHAGEE -X 2.0*
 
 ${menuc}
 
@@ -597,10 +598,8 @@ ${menuc}
 
 R. Rate us
 S. System information 
-
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/5f135d2a91a436a626f05.jpg" }, caption: menumg } , { quoted: mek } )
+`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" }, caption: menumg } , { quoted: mek } )
 
 }
 if ( rew.includes('Moderator Configuration') ) {
@@ -624,7 +623,7 @@ if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
 let baseURI = '/apps/' + config.HEROKU_APP_NAME
 await heroku.patch(baseURI + '/config-vars', {
                     body: {
-                        ['INBOX_USER']: "4593707292"
+                        ['INBOX_USER']: "94710136994"
                     }
                 });
 const resmsg =`*Inbox User List Reseted* ✅
@@ -649,7 +648,7 @@ menuc += `🔎 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *SEARCH COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *SEARCH COMMAND LIST-CYBER SHAGEE-X 2.0*
 
 ${menuc}
 
@@ -659,9 +658,8 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/742690d2d8a26a560e5a1.jpg" }, caption: menumg }, { quoted: mek } )
+`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
 if ( rew.includes('Moderator Configuration') ) {
@@ -686,7 +684,7 @@ if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
 let baseURI = '/apps/' + config.HEROKU_APP_NAME
 await heroku.patch(baseURI + '/config-vars', {
                     body: {
-                        ['BANNED_USER']: "94767438882"
+                        ['BANNED_USER']: "9471013994"
                     }
                 });
 const resmsg =`*Banned Users List Reseted* ✅
@@ -710,7 +708,7 @@ menuc += `🧑‍🔧 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *PROFILE COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *PROFILE COMMAND LIST-CYBER SHAGEE-X 2.0*
 
 ${menuc}
 
@@ -720,9 +718,8 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/7928c34989e127cc97806.jpg" }, caption: menumg } , { quoted: mek })
+`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" }, caption: menumg } , { quoted: mek })
 
 }
 }
@@ -740,7 +737,7 @@ menuc += `🪀 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *GROUP COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *GROUP COMMAND LIST-CYBER SHAGEE-X 2.0*
 
 ${menuc}
 
@@ -750,9 +747,8 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/7a6ae3f57a0b7899aab66.jpg" }, caption: menumg } , { quoted: mek })
+`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" }, caption: menumg } , { quoted: mek })
 
 }
 }
@@ -771,7 +767,7 @@ menuc += `📪 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *EXTRA COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *EXTRA COMMAND LIST-CYBER SHAGEE-X 2.0*
 
 ${menuc}
 
@@ -781,9 +777,8 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/5e9c8d4a76f621b13c414.jpg" }, caption: menumg }, { quoted: mek } )
+`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
 if ( rew.includes('Database Reset Function') ) {
@@ -811,13 +806,11 @@ menuc += `🌅 *Pattern - ${commands[i].pattern}* - _Enter your Text_
 `
 }}};
 
-let menumg = `🔐 *TEXT TO IMAGE COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *TEXT TO IMAGE COMMAND LIST-SHAGEE-X 2.0*
 
 ${menuc}
-
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/913493a6f4bbf23d4d07d.jpg" }, caption: menumg }, { quoted: mek } )
+`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/ec57b757c3c5890d510c3.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
 }
@@ -827,7 +820,7 @@ if ( rew.includes('TIKTOK DOWNLOADER') ) {
 const getlink = rew.split("Link -: ")[1]
 const fulllink = getlink.split("_*")[0]
 let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.play }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
+await conn.sendMessage(from, { video: {url: ttdl.play }, caption: ttdl.nickname + "\n\n*SHAGEE-X ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ SHAGEE-X-MD*" }, { quoted: mek })  
 }
 }
 
@@ -837,7 +830,7 @@ if ( rew.includes('TIKTOK DOWNLOADER') ) {
 const getlink = rew.split("Link -: ")[1]
 const fulllink = getlink.split("_*")[0]
 let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.wmplay }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
+await conn.sendMessage(from, { video: {url: ttdl.wmplay }, caption: ttdl.nickname + "\n\n*SHAGEE-X MD : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ SHAGEE*" }, { quoted: mek })  
 }
 }
 if ( body.startsWith("2.3") && body.length < 4 ) {
@@ -917,7 +910,7 @@ console.log(isError)}
 })
 }
 app.get("/", (req, res) => {
-res.send("*Cyber-X WhatsApp Bot Working successfully..!*");
+res.send("*SHAGEE-X WhatsApp Bot Working successfully..!*");
 });
 app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
 setTimeout(() => {
